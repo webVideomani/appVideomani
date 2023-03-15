@@ -1,15 +1,37 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {TabsComponent} from "./components/tabs/tabs.component";
+import {DatosService} from "./services/datos.service";
+import * as path from "path";
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
+    path: 'contacto/express',
+    loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: TabsComponent,
+    children: [
+      {
+        path: 'contacto',
+        loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
+      },
+      {
+        path: 'gestion',
+        loadChildren: () => import('./pages/gestion/gestion.module').then( m => m.GestionPageModule)
+      },
+
+    ]
   },
 ];
 
@@ -19,4 +41,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}
