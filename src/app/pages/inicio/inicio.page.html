@@ -1,0 +1,20 @@
+<ion-content>
+  <ng-form class="form" [formGroup]="formGroup">
+    <ion-row>
+      <ion-col class="ion-align-items-center ion-justify-content-center">
+        <ion-item fill="outline" class="ion-margin-bottom">
+          <ion-input formControlName="cif" placeholder="CIF"></ion-input>
+        </ion-item>
+        <ion-item fill="outline" class="ion-margin-bottom">
+          <ion-input formControlName="uid" placeholder="UIID"></ion-input>
+        </ion-item>
+        <div class="ion-text-center" >
+          <ion-button id="registrar" (click)="enviar()">Registrar</ion-button>
+        </div>
+        <div class="ion-text-center" id="contactar">
+          <ion-label class="ion-text-center" routerLink="/contacto/express">Contactar con empleado</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ng-form>
+</ion-content>

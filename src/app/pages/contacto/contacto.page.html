@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contacto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-form class="form" [formGroup]="formGroup">
+    <div *ngIf="contactoExpress()">
+      <ion-item fill="outline" class="ion-margin">
+        <ion-label>Teléfono</ion-label>
+        <ion-input formControlName="tlf" type="tel"></ion-input>
+      </ion-item>
+      <ion-item fill="outline" class="ion-margin">
+        <ion-label>Correo</ion-label>
+        <ion-input formControlName="correo" class="form-control" type="email"></ion-input>
+      </ion-item>
+      <ion-item fill="outline" class="ion-margin">
+        <ion-label>Nombre</ion-label>
+        <ion-input formControlName="nombre" class="form-control" type="text"></ion-input>
+      </ion-item>
+      <ion-item fill="outline" class="ion-margin">
+        <ion-label>Apellidos</ion-label>
+        <ion-input formControlName="apellidos" class="form-control" type="text"></ion-input>
+      </ion-item>
+    </div>
+    <div>
+      <ion-item fill="outline" class="ion-margin">
+        <ion-textarea formControlName="comentario" placeholder="Comentario" auto-grow="true"></ion-textarea>
+      </ion-item>
+    </div>
+  </ng-form>
+  <ion-row>
+    <div *ngIf="contactoExpress()">
+      <ion-button routerLink="" class="ion-margin-start" fill="clear" >
+        Volver
+      </ion-button>
+    </div>
+    <ion-button (click)="enviar()" class="ion-margin-start" >
+      Enviar
+    </ion-button>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "972645192047",
+    "project_id": "webvideomani-d225e",
+    "storage_bucket": "webvideomani-d225e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972645192047:android:b22e98deab386f37c5d89a",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972645192047-cstte37smqk3o99u36ngq5fp7prjtmcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG0iSCNFDTL_oAHrPNAmY_UyVFBuDSEjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972645192047-cstte37smqk3o99u36ngq5fp7prjtmcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
