@@ -15,12 +15,12 @@ export class DatosService {
     .set('Content-Type', 'text/xml')
     .set('Accept', '*/*');
 
-  //URIComprobar: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/ComprobarTitular'
-  URIComprobar: string = 'http://192.168.146.111/Facturas/ComprobarTitular'
+  URIComprobar: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/ComprobarTitular'
+  //URIComprobar: string = 'http://192.168.146.111/Facturas/ComprobarTitular'
   URI: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/FacturasTitular'
 
-  //post_URI: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/InsertarAvisoComercial'
-  post_URI: string = 'http://192.168.146.111/Facturas/InsertarAvisoComercial'
+  post_URI: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/InsertarAvisoComercial'
+  //post_URI: string = 'http://192.168.146.111/Facturas/InsertarAvisoComercial'
 
   async construirRuta(cif: string, uid: string){/*
     let cif: string = await this.storage.get('cif')
@@ -72,7 +72,7 @@ export class DatosService {
     this.cif?.['set']('cif', value);
   }
 
-  public setUiid(value: any) {
+  public setUid(value: any) {
     this.uid?.['set']('uid', value);
   }
 

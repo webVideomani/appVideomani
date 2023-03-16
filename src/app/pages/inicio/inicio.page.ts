@@ -19,6 +19,7 @@ import {
 export class InicioPage implements OnInit {
   ruta: any = '/gestion'
 
+  hostname = window.location.host
   constructor(
     private router: Router,
     private toastController: ToastController,
@@ -29,8 +30,7 @@ export class InicioPage implements OnInit {
 
   formGroup: FormGroup = this.formBuilder.group({
     cif: ['', [Validators.required]],
-    uid: ['', [Validators.required]],
-    correo: ['']
+    uid: ['', [Validators.required]]
   })
   ngOnInit() {
 
@@ -49,28 +49,28 @@ export class InicioPage implements OnInit {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration',
       (token: Token) => {
-        alert('Push registration success, token: ' + token.value);
+        //alert('Push registration success, token: ' + token.value);
       }
     );
 
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
+        //alert('Error on registration: ' + JSON.stringify(error));
       }
     );
 
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
+        //alert('Push received: ' + JSON.stringify(notification));
       }
     );
 
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
+        //alert('Push action performed: ' + JSON.stringify(notification));
       }
     )
 
@@ -88,7 +88,7 @@ export class InicioPage implements OnInit {
         console.log(data)
         if (data == null){
           this.datosService.setCif(this.cif())
-          this.datosService.setUiid(this.uid())
+          this.datosService.setUid(this.uid())
           this.presentToast('Campos verificados')
           this.router.navigateByUrl(this.ruta)
           return
