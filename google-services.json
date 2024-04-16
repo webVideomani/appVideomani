@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:972645192047:android:b22e98deab386f37c5d89a",
         "android_client_info": {
-          "package_name": "io.ionic.starter"
+          "package_name": "com.videomani.app"
         }
       },
       "oauth_client": [

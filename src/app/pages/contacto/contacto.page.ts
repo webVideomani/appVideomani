@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DatosService} from "../../services/datos.service";
 import {MensajeRegistrado} from "../../interfaces/mensajeRegistrado/mensaje-registrado";
 import {MensajeNoRegistrado} from "../../interfaces/mensajeNoRegistrado/mensaje-no-registrado";
+import {Preferences} from "@capacitor/preferences";
 
 @Component({
   selector: 'app-contacto',
@@ -48,8 +49,7 @@ export class ContactoPage implements OnInit {
           text: 'OK',
           role: 'confirm',
           handler: () => {
-            this.presentToast(this.toastMensajeOK)
-            this.router.navigateByUrl(this.ruta)
+            this.enviar()
           },
         },
       ],
@@ -75,54 +75,62 @@ export class ContactoPage implements OnInit {
 
     if (this.formGroup.invalid){
       this.formGroup.markAllAsTouched();
-      this.presentToast(this.toastMensajeError)
+      await this.presentToast(this.toastMensajeError)
       return
     }
 
-    this.presentAlert().then( async () => {
-      if (reg) {
-        this.datosService.postMensajeRegistrado(
-          await this.datosService.construirRutaPostRegistrado(
-             await this.datosService.storage.get('cif'),
-             await this.datosService.storage.get('uid')),
-           this.formGroup.controls['comentario'].value).subscribe(data => console.log(data))
+    else {
+        if (reg) {
+          let cif: any
+          await Preferences.get({key: 'cif'}).then(data => cif = data.value)
+          let uid: any
+          await Preferences.get({key: 'uid'}).then(data => uid = data.value)
+          this.datosService.postMensajeRegistrado(
+            await this.datosService.construirRutaPostRegistrado(
+              cif,uid
+              /*await this.datosService.storage.get('cif'),
+              await this.datosService.storage.get('uid')*/),
+            this.formGroup.controls['comentario'].value).subscribe(data => console.log(data))
 
-        /*let cif: string
-        let mensaje:  string = this.formGroup.controls['comentario'].value
-        this.datosService.storage.get('cif').then(res => {
-          cif = res
-          let mensajeRegistrado: MensajeRegistrado = {
-            cif: cif,
+          /*let cif: string
+          let mensaje:  string = this.formGroup.controls['comentario'].value
+          this.datosService.storage.get('cif').then(res => {
+            cif = res
+            let mensajeRegistrado: MensajeRegistrado = {
+              cif: cif,
+              mensaje: mensaje
+            }
+            this.datosService.postSoapMensajeRegistrado(mensajeRegistrado).subscribe(data => {
+              this.presentToast(data)
+              console.log(data)
+              this.presentAlert()
+            })
+          })*/
+        } else {
+          this.datosService.postMensajeNoRegistrado(
+            await this.datosService.construirRutaPostNoRegistrado(
+              this.formGroup.controls['tlf'].value),
+            this.construirMensaje()
+          ).subscribe(data => console.log(data))
+
+          /*
+          let tlf: string = this.formGroup.controls['tlf'].value
+          let mensaje: string = this.construirMensaje()
+          let mensajeNoRegistrado: MensajeNoRegistrado = {
+            telefono: tlf,
             mensaje: mensaje
           }
-          this.datosService.postSoapMensajeRegistrado(mensajeRegistrado).subscribe(data => {
+          this.datosService.postSoapMensajeNoRegistrado(mensajeNoRegistrado).subscribe(data => {
             this.presentToast(data)
             console.log(data)
             this.presentAlert()
-          })
-        })*/
-      } else {
-        this.datosService.postMensajeNoRegistrado(
-          await this.datosService.construirRutaPostNoRegistrado(
-            this.formGroup.controls['tlf'].value),
-          this.construirMensaje()
-        ).subscribe(data => console.log(data))
-
-        /*
-        let tlf: string = this.formGroup.controls['tlf'].value
-        let mensaje: string = this.construirMensaje()
-        let mensajeNoRegistrado: MensajeNoRegistrado = {
-          telefono: tlf,
-          mensaje: mensaje
+          })*/
         }
-        this.datosService.postSoapMensajeNoRegistrado(mensajeNoRegistrado).subscribe(data => {
-          this.presentToast(data)
-          console.log(data)
-          this.presentAlert()
-        })*/
-      }
-    })
-    return;
+      await this.presentToast(this.toastMensajeOK)
+      await this.router.navigateByUrl(this.ruta)
+      return;
+    }
+
 }
 
 

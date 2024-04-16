@@ -10,6 +10,7 @@ import {
   PushNotifications,
   Token,
 } from '@capacitor/push-notifications';
+import {Preferences} from "@capacitor/preferences";
 
 @Component({
   selector: 'app-inicio',
@@ -33,6 +34,7 @@ export class InicioPage implements OnInit {
     uid: ['', [Validators.required]]
   })
   ngOnInit() {
+
 
     // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
@@ -74,6 +76,12 @@ export class InicioPage implements OnInit {
       }
     )
 
+
+    Preferences.get({key: 'cif'}).then(data => {
+      console.log(data.value)
+      if (data.value != null) this.router.navigateByUrl(this.ruta)
+    })
+
   }
 
   enviar(){
@@ -87,16 +95,26 @@ export class InicioPage implements OnInit {
       this.http.get(res).subscribe(data => {
         console.log(data)
         if (data == null){
-          this.datosService.setCif(this.cif())
-          this.datosService.setUid(this.uid())
+          Preferences.set({
+            key: 'cif',
+            value: this.cif()
+          })
+          Preferences.set({
+            key: 'uid',
+            value: this.uid()
+          })
+          /*this.datosService.setCif(this.cif())
+          this.datosService.setUid(this.uid())*/
           this.presentToast('Campos verificados')
           this.router.navigateByUrl(this.ruta)
           return
         }
+        else {
+          this.presentToast('Campos no verificados')
+          return
+        }
       })
     })
-    this.presentToast('Campos no verificados')
-    return
 
   }
 

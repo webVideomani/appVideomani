@@ -22,8 +22,8 @@ export class DatosService {
   post_URI: string = 'https://webservice.salonesdejuegoreplay.com/Gestion/Facturas/InsertarAvisoComercial'
   //post_URI: string = 'http://192.168.146.111/Facturas/InsertarAvisoComercial'
 
-  async construirRuta(cif: string, uid: string){/*
-    let cif: string = await this.storage.get('cif')
+  async construirRuta(cif: string, uid: string){
+    /*let cif: string = await this.storage.get('cif')
     let uid: string = await this.storage.get('uid')*/
     return this.URI + '?cif='
       + cif + '&uid='
@@ -53,28 +53,28 @@ export class DatosService {
     return this.post_URI + 'NoRegistrado.aspx?telefono=' + tlf
   }
 
-  private cif: Storage | null = null;
-  private uid: Storage | null = null;
+  //private cif: Storage | null = null;
+  //private uid: Storage | null = null;
 
-  private stLength: Number | undefined
+  //private stLength: Number | undefined
 
   constructor(public storage: Storage, private http: HttpClient) {
     this.init();
   }
 
   async init() {
-    this.cif = await this.storage['create']();
-    this.uid = await this.storage['create']();
-    this.stLength = await this.storage.length()
+    //this.cif = await this.storage['create']();
+    //this.uid = await this.storage['create']();
+    //this.stLength = await this.storage.length()
   }
 
-  public setCif(value: any) {
+  /*public setCif(value: any) {
     this.cif?.['set']('cif', value);
   }
 
   public setUid(value: any) {
     this.uid?.['set']('uid', value);
-  }
+  }*/
 
   postMensajeRegistrado(url: string, mensaje: string): Observable<any> {
     console.log(url)

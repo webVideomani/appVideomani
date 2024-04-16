@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.videomani.app",
 	"appName": "Videomani",
 	"webDir": "www",
 	"bundledWebRuntime": false
